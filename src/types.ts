@@ -35,6 +35,7 @@ export type UseWhisperReturn = {
 export type UseWhisperHook = (config?: UseWhisperConfig) => UseWhisperReturn
 
 export type WhisperApiConfig = {
+  endpoint?: string
   model?: 'whisper-1' | string
   prompt?: string
   response_format?: 'json' | 'text' | 'srt' | 'verbose_json' | 'vtt'

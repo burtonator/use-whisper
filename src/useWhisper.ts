@@ -75,6 +75,7 @@ export const useWhisper: UseWhisperHook = (config) => {
     throw new Error('apiKey is required if onTranscribe is not provided')
   }
 
+  const endpoint = config?.whisperConfig?.endpoint ?? whisperApiEndpoint
   const chunks = useRef<Blob[]>([])
   const encoder = useRef<Encoder>()
   const listener = useRef<Harker>()
@@ -519,12 +520,12 @@ export const useWhisper: UseWhisperHook = (config) => {
         headers['Authorization'] = `Bearer ${apiKey}`
       }
       const { default: axios } = await import('axios')
-      const response = await axios.post(whisperApiEndpoint + mode, body, {
+      const response = await axios.post(endpoint + mode, body, {
         headers,
       })
       return response.data.text
     },
-    [apiKey, mode, whisperConfig]
+    [apiKey, mode, endpoint]
   )
 
   return {
